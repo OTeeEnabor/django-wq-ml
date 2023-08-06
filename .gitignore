@@ -1,0 +1,7 @@
+.ebextensions
+.ipynb_checkpoints
+db.sqlite3
+wqapp/.env
+wqapp/__pycache__
+code (2).zip
+

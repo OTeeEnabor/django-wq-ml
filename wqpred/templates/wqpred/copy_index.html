@@ -1,0 +1,143 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}
+Water Quality Prediction
+{% endblock %}
+
+{% block css_files %}
+<link rel="stylesheet" href='{% static "index.css" %}'>
+{% endblock %}
+
+{% block content %}
+    <section id="info">
+        <h2>Water Quality Predictor</h2>
+    </section>
+    <div id="predForm">
+        <p>Please input water information in the form below to check if water is safe for consumption.</p>
+        <form action="result" method="POST">
+            {% csrf_token %}
+            <div class="form-group">
+                <label for="aluminum">Aluminum</label>
+                <input type="text" class="form-control" id="aluminum" name="aluminum" aria-describedby="emailHelp" placeholder="Aluminum reading" required>
+            </div>
+            <div class ="tab">
+                <div class="form-group">
+                    <label for="ammonia">Ammonia</label>
+                    <input type="text" class="form-control" id="ammonia" name="ammonia" placeholder="Ammonia reading" required>
+                </div>
+                <div class="form-group">
+                    <label for="arsenic">Arsenic</label>
+                    <input type="text" class="form-control" id="arsenic" name="arsenic" placeholder="Arsenic reading" required>
+                </div>
+                <div class="form-group">
+                    <label for="barium">Barium</label>
+                    <input type="text" class="form-control" id="barium"  name="barium" placeholder="Arsenic reading" required>
+                </div>
+                <div class="form-group">
+                    <label for="cadmium">Cadmium</label>
+                    <input type="text" class="form-control" id="cadmium" name="cadmium" placeholder="Arsenic reading" required>
+                </div>
+                <div class="form-group">
+                    <label for="chloramine">Chloramine</label>
+                    <input type="text" class="form-control" id="chloramine" name="chloramine" placeholder="Arsenic reading" required>
+                </div>
+            </div>
+            
+            <div class="tab">
+                <div class="form-group">
+                    <label for="chromium">Chromium</label>
+                    <input type="text" class="form-control" id="chromium" name="chromium" placeholder="Arsenic reading" required>
+                </div>
+                <div class="form-group">
+                    <label for="copper">Copper</label>
+                    <input type="text" class="form-control" id="copper" name="copper" placeholder="Arsenic reading" required>
+                </div>
+                <div class="form-group">
+                    <label for="fluoride">Flouride</label>
+                    <input type="text" class="form-control" id="fluoride" name="fluoride" placeholder="Arsenic reading" required>
+                </div>
+                <div class="form-group">
+                    <label for="bacteria">Bacteria</label>
+                    <input type="text" class="form-control" id="bacteria" name="bacteria" placeholder="Arsenic reading" required>
+                </div>
+                <div class="form-group">
+                    <label for="viruses">Viruses</label>
+                    <input type="text" class="form-control" id="viruses" name="viruses" placeholder="Arsenic reading" required>
+                </div>
+            </div>
+            
+            <div class="tab">
+                <div class="form-group">
+                    <label for="lead">Lead</label>
+                    <input type="text" class="form-control" id="lead" name="lead" placeholder="Arsenic reading" required>
+                </div>
+                <div class="form-group">
+                    <label for="nitrates">Nitrates</label>
+                    <input type="text" class="form-control" id="nitrates" name="nitrates" placeholder="Arsenic reading" required>
+                </div>
+                <div class="form-group">
+                    <label for="nitrites">Nitrites</label>
+                    <input type="text" class="form-control" id="nitrites" name="nitrites" placeholder="Arsenic reading" required>
+                </div>
+                <div class="form-group">
+                    <label for="mercury">Mercury</label>
+                    <input type="text" class="form-control" id="mercury" name="mercury" placeholder="Arsenic reading" required>
+                </div>
+                <div class="form-group">
+                    <label for="perchlorate">Perchlorate</label>
+                    <input type="text" class="form-control" id="perchlorate" name="perchlorate" placeholder="Arsenic reading" required>
+                </div>
+            </div>
+
+            <div class="tab">
+                <div class="form-group">
+                    <label for="radium">Radium</label>
+                    <input type="text" class="form-control" id="radium"  name="radium" placeholder="Arsenic reading" required>
+                </div>
+                <div class="form-group">
+                    <label for="selenium">Selenium</label>
+                    <input type="text" class="form-control" id="selenium" name="selenium" placeholder="Arsenic reading" required>
+                </div>
+                <div class="form-group">
+                    <label for="silver">Silver</label>
+                    <input type="text" class="form-control" id="silver" name="silver" placeholder="Arsenic reading" required>
+                </div>
+                <div class="form-group">
+                    <label for="uranium">Uranium</label>
+                    <input type="text" class="form-control" id="uranium" name="uranium" placeholder="Arsenic reading" required>
+                </div>
+                <button type="submit" class="btn btn-primary">Predict</button>
+            </div>
+            <div style="overflow:auto;">
+                <div style="float:right;">
+                  <button type="button" id="prevBtn" onclick="nextPrev(-1)">Previous</button>
+                  <button type="button" id="nextBtn" onclick="nextPrev(1)">Next</button>
+                </div>
+        </form>
+    </div>
+
+
+
+{% endblock %}
+
+
+{%if result != 'no' %}
+<div class="result-prediction">
+    {% comment %} <h2>Prediction Results</h2> {% endcomment %}
+    <img src="{% static "wqpred/images/water_safe.png" %}" alt="The water is safe to drink.">
+    <p>Based on the input values from the previous page, this water is safe to drink.</p>
+</div>
+{% elif result == 'no'%}
+<div class="result-prediction">
+    {% comment %} <h2>Prediction Results</h2> {% endcomment %}
+    <img src="{% static "wqpred/images/water_not_safe.png" %}" alt="The water is not safe to drink.">
+    <p>Based on the input values from the previous page, this water is not safe to drink.</p>
+</div>
+{% else %}
+<div class="result-prediction">
+{% comment %} <h2>Prediction Results</h2> {% endcomment %}
+<img src="" alt="We do not know if this water is safe to drink or not.">
+<p>Based on the input values from the previous page, we cannot conclude wheter water is safe or not to drink.</p>
+</div>
+{% endif %}

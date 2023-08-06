@@ -1,0 +1,39 @@
+#predForm {
+    text-align: center;
+    padding: 3rem;
+    background-color: #e48900;
+    /* margin-top: 5rem; */
+  }
+.form-block {
+  padding: 3rem;
+  background-color: #270C3B;
+}
+.tab {
+  display: none;
+}
+label {
+  color: #ffffff;
+  font-weight: bold;
+}
+input {
+  border: 1px solid #aaaaaa;
+}
+/* Mark input boxes that gets an error on validation: */
+input.invalid {
+  background-color: #ffdddd;
+}
+button {
+  background-color: #e48900;
+  color: #ffffff;
+  border: none;
+  padding: 10px 20px;
+  font-size: 20px;
+  cursor: pointer;
+}
+button:hover {
+  opacity: 0.8;
+}
+
+#prevBtn {
+  background-color: #bbbbbb;
+}

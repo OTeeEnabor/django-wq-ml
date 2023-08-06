@@ -1,0 +1,46 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}
+Water Quality Prediction
+{% endblock %}
+
+{% block css_files %}
+<link rel="stylesheet" href='{% static "index.css" %}'>
+{% endblock %}
+
+{% block content %}
+    <section id="info">
+        <h2>Water Quality Predictor</h2>
+    </section>
+    <div id="predForm">
+        <p>Please input water information in the form below to check if water is safe for consumption.</p>
+        <form action="form_2" method="POST">
+            {% csrf_token %}
+            <div class="form-group">
+                <label for="aluminum">Aluminum</label>
+                <input type="text" class="form-control" id="aluminum" name="aluminum" aria-describedby="emailHelp" placeholder="Aluminum reading" required>
+            </div>
+            <div class="form-group">
+                <label for="ammonia">Ammonia</label>
+                <input type="text" class="form-control" id="ammonia" name="ammonia" placeholder="Ammonia reading" required>
+            </div>
+            <div class="form-group">
+                <label for="arsenic">Arsenic</label>
+                <input type="text" class="form-control" id="arsenic" name="arsenic" placeholder="Arsenic reading" required>
+            </div>
+            <div class="form-group">
+                <label for="barium">Barium</label>
+                <input type="text" class="form-control" id="barium"  name="barium" placeholder="Arsenic reading" required>
+            </div>
+            <div class="form-group">
+                <label for="cadmium">Cadmium</label>
+                <input type="text" class="form-control" id="cadmium" name="cadmium" placeholder="Arsenic reading" required>
+            </div>
+            <button type="submit" class="btn btn-primary">Predict</button>
+        </form>
+    </div>
+
+
+
+{% endblock %}

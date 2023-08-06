@@ -1,0 +1,64 @@
+{% extends "base.html" %}
+{% load static %}
+{% block title%}
+Prediction Result
+{% endblock%}
+{% block css_files %}
+<link rel="stylesheet" href='{% static "result.css" %}'>
+{% endblock %}
+{% block content %}
+<div class="resultContainer">
+    <section id="resultBlock">
+        <div class="result-header">
+            <h2> Prediction Result </h2>
+            <hr>
+        </div>
+            {% if pred %}
+            <div class="result-section-safe">
+                <p>Based on the input given to the model, the water sample is safe for consumption. T</p>
+                <img src="{%static "wqpred/images/water_safe.png" %}" alt="Water sample is safe.">
+            </div>
+            {% else %}
+            <div class="result-section-not-safe">
+                <div class ="result-text">
+                    <p>Based on the inputs given to the machine learning model, this water sample is deemed not safe for consumption. The chemicals listed below are deemed to be the most influential in determing the outcome of water quality:</p>
+                    <ul>
+                        {%for key, value in features.items%}
+                            <li>{{key}}: {{value}}</li>
+                        {%endfor%} 
+                    </ul>
+                </div>
+                <div class="result-image">
+                    <img src="{%static "wqpred/images/water_not_safe.png"%}" alt="Water sample is not safe.">
+                </div>
+            </div>
+            {% endif %}
+       {% comment %} </div> {% endcomment %}
+    </section>
+</div>
+<div class="resultContainer">
+    <section id = "resultAnalysis">
+        <div class="result-header">
+            <h2> Prediction Analysis </h2>
+            <hr>
+        </div>
+        <div class="analysis-text">
+            <p>
+                A Random Forest classifier was used to predict the quality of the water sample. The classifier was trained with a publicly accessible dataset which had 8000 observations. The dataset was heavily imbalnaced with <strong>11%</strong> of the observations being safe to consume. The figure below shows the distribution of the target variable. 
+            </p>
+        </div>
+        <div class="analysis-image-holders">
+            <div class="image">
+            {% autoescape off %}
+                    {{target_distribution}}
+            {% endautoescape %}
+            </div>
+            <div class="image">
+            {% autoescape off %}
+                    {{median_distribution}}
+            {% endautoescape %}
+            </div> 
+        </div>
+    </section>
+</div>
+{% endblock %}

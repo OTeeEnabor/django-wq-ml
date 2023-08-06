@@ -1,0 +1,150 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}
+Water Quality Prediction
+{% endblock %}
+
+{% block css_files %}
+<link rel="stylesheet" href='{% static "index.css" %}'>
+{% endblock %}
+
+{% block content %}
+    <div id="predForm">
+        <h3>Please input water information in the form below to check if water is safe for consumption.</h3>
+        <form class="form-block" method="POST">
+            {% csrf_token %}
+            <input type="hidden" id="id" name="id" value="{{id}}">
+            <div class ="tab">
+                <div class="form-group">
+                    {{form.aluminum.label_tag}}
+                    {{form.aluminum}}
+                    {{form.aluminum.errors}}
+                </div>
+                <div class="form-group">
+                    {{form.ammonia.label_tag}}
+                    {{form.ammonia}}
+                    {{form.ammonia.errors}}
+                </div>
+                <div class="form-group">
+                    {{form.arsenic.label_tag}}
+                    {{form.arsenic}}
+                    {{form.arsenic.errors}}
+                </div>
+                <div class="form-group">
+                    {{form.barium.label_tag}}
+                    {{form.barium}}
+                    {{form.barium.errors}}
+                </div>
+                <div class="form-group">
+                    {{form.cadmium.label_tag}}
+                    {{form.cadmium}}
+                    {{form.cadmium.errors}}
+                </div>
+
+            </div>
+            
+            <div class="tab">
+                <div class="form-group">
+                    {{form.chloramine.label_tag}}
+                    {{form.chloramine}}
+                    {{form.chloramine.errors}}
+                </div>
+                <div class="form-group">
+                    {{form.chromium.label_tag}}
+                    {{form.chromium}}
+                    {{form.chromium.errors}}
+                </div>
+                <div class="form-group">
+                    {{form.copper.label_tag}}
+                    {{form.copper}}
+                    {{form.copper.errors}}
+                </div>
+                <div class="form-group">
+                    {{form.flouride.label_tag}}
+                    {{form.flouride}}
+                    {{form.flouride.errors}}
+                </div>
+                <div class="form-group">
+                    {{form.bacteria.label_tag}}
+                    {{form.bacteria}}
+                    {{form.bacteria.errors}}
+                </div>
+            </div>
+            
+            <div class="tab">
+                <div class="form-group">
+                    {{form.viruses.label_tag}}
+                    {{form.viruses}}
+                    {{form.viruses.errors}}
+                </div>
+                <div class="form-group">
+                    {{form.lead.label_tag}}
+                    {{form.lead}}
+                    {{form.lead.errors}}
+                </div>
+                <div class="form-group">
+                    {{form.nitrates.label_tag}}
+                    {{form.nitrates}}
+                    {{form.nitrates.errors}}
+                </div>
+                <div class="form-group">
+                    {{form.nitrites.label_tag}}
+                    {{form.nitrites}}
+                    {{form.nitrites.errors}}
+                </div>
+                <div class="form-group">
+                    {{form.mercury.label_tag}}
+                    {{form.mercury}}
+                    {{form.mercury.errors}}
+                </div>
+                
+            </div>
+
+            <div class="tab">
+                <div class="form-group">
+                    {{form.perchlorate.label_tag}}
+                    {{form.perchlorate}}
+                    {{form.perchlorate.errors}}
+                </div>
+                <div class="form-group">
+                    {{form.radium.label_tag}}
+                    {{form.radium}}
+                    {{form.radium.errors}}
+                </div>
+                <div class="form-group">
+                    {{form.selenium.label_tag}}
+                    {{form.selenium}}
+                    {{form.selenium.errors}}
+                </div>
+                <div class="form-group">
+                    {{form.silver.label_tag}}
+                    {{form.silver}}
+                    {{form.silver.errors}}
+                </div>
+                <div class="form-group">
+                    {{form.uranium.label_tag}}
+                    {{form.uranium}}
+                    {{form.uranium.errors}}
+                </div>
+            </div>
+            <div style="overflow:auto;">
+                <div style="float:right;">
+                  <button type="button" id="prevBtn" onclick="nextPrev(-1)">Previous</button>
+                  <button type="button" id="nextBtn" onclick="nextPrev(1)">Next</button>
+                </div>
+        <!-- Circles which indicates the steps of the form: -->
+<div style="text-align:center;margin-top:40px;">
+    <span class="step"></span>
+    <span class="step"></span>
+    <span class="step"></span>
+    <span class="step"></span>
+  </div>
+        </form>
+    </div>
+{% endblock %}
+
+{% block js%}
+<script type="text/javascript" src="{% static "wqpred/js/form.js" %}"></script>
+
+{% endblock%}
