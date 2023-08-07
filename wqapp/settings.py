@@ -35,9 +35,7 @@ DEVELOPMENT_MODE = getenv("DEVELOPMENT_MODE",True) == True
 DEBUG = getenv("IS_DEVELOPMENT",True)
 
 
-ALLOWED_HOSTS = [
-    getenv("APP_HOST","127.0.0.1,localhost").split(",")
-]
+ALLOWED_HOSTS = getenv("APP_HOST","127.0.0.1,localhost").split(",")
 
 
 # if DEVELOPMENT_MODE is "True" :
