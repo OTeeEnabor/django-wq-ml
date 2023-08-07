@@ -15,8 +15,8 @@ import dj_database_url
 from os import getenv
 import environ
 from pathlib import Path
-# env = environ.Env()
-# environ.Env.read_env()
+env = environ.Env()
+environ.Env.read_env()
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -29,28 +29,30 @@ PROJECT_DIR = Path(__file__).resolve().parent
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = getenv("SECRET_KEY")
 
+DEVELOPMENT_MODE = getenv("DEVELOPMENT_MODE",True) == True
+
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = getenv("IS_DEVELOPMENT",True)
 
 
 ALLOWED_HOSTS = [
-    getenv("APP_HOST")
+    getenv("APP_HOST","127.0.0.1,localhost").split(",")
 ]
 
-DEVELOPMENT_MODE = getenv("DEVELOPMENT_MODE","FALSE") == "TRUE"
-if DEVELOPMENT_MODE is True :
-    DATABASES = {
-        "default": {
-            "ENGINE":"django.db.backends.sqlite3",
-            "NAME": os.path.join(BASE_DIR, "db.sqlite3"),
-        }
-    }
-elif len(sys.argv) > 0 and sys.argv[1] != "collectstatic":
-    if getenv("DATABASE_URL", None) is None:
-        raise Exception("DATABASE_URL environment variable not defined")
-    DATABASES = {
-        "default": dj_database_url.parse(os.environ.get("DATABASE_URL")),
-    }
+
+# if DEVELOPMENT_MODE is "True" :
+#     DATABASES = {
+#         "default": {
+#             "ENGINE":"django.db.backends.sqlite3",
+#             "NAME": os.path.join(BASE_DIR, "db.sqlite3"),
+#         }
+#     }
+# elif len(sys.argv) > 0 and sys.argv[1] != "collectstatic":
+#     if getenv("DATABASE_URL", None) is None:
+#         raise Exception("DATABASE_URL environment variable not defined")
+#     DATABASES = {
+#         "default": dj_database_url.parse(os.environ.get("DATABASE_URL")),
+#     }
 # Application definition
 
 INSTALLED_APPS = [
@@ -94,8 +96,6 @@ TEMPLATES = [
 ]
 
 WSGI_APPLICATION = 'wqapp.wsgi.application'
-
-
 # Database
 # https://docs.djangoproject.com/en/4.2/ref/settings/#databases
 
@@ -105,16 +105,21 @@ WSGI_APPLICATION = 'wqapp.wsgi.application'
 #         'NAME': BASE_DIR / 'db.sqlite3',
 #     }
 # }
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': getenv("DB_NAME"), 
-        'USER': getenv("DB_USER"),
-        'PASSWORD': getenv("DB_PASSWORD"),
-        'HOST': getenv("DB_HOST"), 
-        'PORT': getenv("DB_PORT"),
+if DEVELOPMENT_MODE is True:
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.postgresql_psycopg2',
+            'NAME': getenv("DB_NAME"), 
+            'USER': getenv("DB_USER"),
+            'PASSWORD': getenv("DB_PASSWORD"),
+            'HOST': getenv("DB_HOST"), 
+            'PORT': getenv("DB_PORT"),
+        }
     }
-}
+else:
+    DATABASES = {
+        "default": dj_database_url.parse(os.environ.get("DATABASE_URL")),
+    }
 
 
 # Password validation
