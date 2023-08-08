@@ -21,7 +21,11 @@ input {
 /* Mark input boxes that gets an error on validation: */
 input.invalid {
   background-color: #ffdddd;
+}.pagination-button-container {
+  overflow:auto;
+  margin-top: 1rem;
 }
+
 button {
   background-color: #e48900;
   color: #ffffff;
