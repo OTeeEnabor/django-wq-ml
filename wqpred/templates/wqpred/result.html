@@ -7,12 +7,48 @@ Prediction Result
 <link rel="stylesheet" href='{% static "result.css" %}'>
 {% endblock %}
 {% block content %}
+<section id="resultBlock">
+    <div class="result-header">
+        <h2> Prediction Result </h2>
+        <hr>
+    </div>
+    <div class="result-container">
+        <div class="result-summary">
+            <h3>Prediction:</h3> <span>SAFE</span>
+            <h3>Prediction Probability: </h3> <span>65%</span>
+        </div>
+        <div class="result-image-container">
+            <img src="{%static "wqpred/images/water_not_safe.png"%}"  class="img-fluid" alt="Water sample is not safe.">
+        </div>
+        <div class="result-important-features">
+            <p>The water sample is not safe. The table below shows the most influential chemicals that determine water safety.
+            </p>
+            <table class="table table-striped ">
+                <thead class="thead-dark">
+                    <tr>
+                      <th scope="col">Chemicals</th>
+                      <th scope="col">User Input</th>
+                      <th scope="col">Median Value</th>
+                      <th scope="col">Difference</th>
+                    </tr>
+                </thead>
+                {% for feature in feature_comp %}
+                <tr>
+                    <th scope="row">{{feature.0}}</th>
+                    <td>{{feature.1}}</td>
+                    <td>{{feature.2}}</td>
+                    <td>{{feature.3}}</td>
+                  </tr>
+                {% endfor %}
+            </table>
+        </div>
+    </div>
+
+</section>
+{% comment %} 
 <div class="resultContainer">
     <section id="resultBlock">
-        <div class="result-header">
-            <h2> Prediction Result </h2>
-            <hr>
-        </div>
+        
             {% if pred %}
             <div class="result-section-safe">
                 <p>Based on the input given to the model, the water sample is safe for consumption. T</p>
@@ -34,8 +70,8 @@ Prediction Result
             </div>
             {% endif %}
        {% comment %} </div> {% endcomment %}
-    </section>
-</div>
+    {% comment %} </section>
+</div> {% endcomment %} 
 <div class="resultContainer">
     <section id = "resultAnalysis">
         <div class="result-header">

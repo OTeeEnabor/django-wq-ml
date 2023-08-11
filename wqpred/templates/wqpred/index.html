@@ -11,8 +11,9 @@ Water Quality Prediction
 
 {% block content %}
     <div id="predForm">
-        <h3>Please input water information in the form below to check if water is safe for consumption.</h3>
-        <form class="form-block" method="POST">
+        <h3>Water Quality Form</h3>
+        <hr style="color:white;">
+        <form class="form-block" method="POST" onsubmit="showModal()">
             {% csrf_token %}
             <input type="hidden" id="id" name="id" value="{{id}}">
             <div class ="tab">

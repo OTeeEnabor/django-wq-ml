@@ -4,6 +4,9 @@
     background-color: #e48900;
     /* margin-top: 5rem; */
   }
+#predForm h3 {
+  color: white;
+}
 .form-block {
   padding: 3rem;
   background-color: #270C3B;
