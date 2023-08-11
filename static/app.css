@@ -36,3 +36,19 @@ h3 {
   align-items: center;
   color: #fff;
 }
+
+.modal-container {
+  display: none;
+  padding: 1rem 1rem;
+  background-color:#270C3B;
+  color: #fff;
+  height: 50%;
+  width: 100%;
+  position: absolute;
+  top: 50%;
+}
+
+.content-modal{
+  margin-top: 2rem;
+  text-align: center;
+}
