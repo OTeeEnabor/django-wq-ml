@@ -3,5 +3,7 @@
 db.sqlite3
 wqapp/.env
 wqapp/__pycache__
+wqpred/__pycache__
 code (2).zip
+staticfiles/
 
