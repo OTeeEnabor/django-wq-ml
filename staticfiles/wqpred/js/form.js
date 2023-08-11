@@ -1,5 +1,5 @@
 var currentTab = 0; // Current tab is set to be the first tab (0)
-console.log(currentTab);
+// console.log(currentTab);
 showTab(currentTab); // Display the current tab
 
 function showTab(n) {
@@ -78,7 +78,14 @@ function validateForm(){
 
 }
 
+function showModal() {
+    // get button container
+    var pag_button_container = document.getElementById("myModal"); //("modal-container")[0];
+    if (pag_button_container.style.display == "none") {
+        pag_button_container.style.display = "block";
+    }
 
+}
 
 
 function fixStepIndicator(n) {

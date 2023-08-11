@@ -14,15 +14,19 @@ Prediction Result
     </div>
     <div class="result-container">
         <div class="result-summary">
-            <h3>Prediction:</h3> <span>SAFE</span>
-            <h3>Prediction Probability: </h3> <span>65%</span>
+            <h3>Prediction:</h3> <span>{% if pred %}SAFE {% else %} NOT SAFE {% endif %} </span>
+            <br>
+            <h3>Prediction Probability: </h3> <span>{{pred_prob}}</span>
         </div>
         <div class="result-image-container">
-            <img src="{%static "wqpred/images/water_not_safe.png"%}"  class="img-fluid" alt="Water sample is not safe.">
+            <div class="img-wrap">
+                <img src="{%static "wqpred/images/water_not_safe.png"%}" alt="Water sample is not safe.">
+            </div>
         </div>
         <div class="result-important-features">
             <p>The water sample is not safe. The table below shows the most influential chemicals that determine water safety.
             </p>
+            <h3> Input vs Median Comparison </h3>
             <table class="table table-striped ">
                 <thead class="thead-dark">
                     <tr>

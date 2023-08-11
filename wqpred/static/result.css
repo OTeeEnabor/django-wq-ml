@@ -13,10 +13,46 @@
     flex-wrap: wrap;
     /* margin-top: 5rem; */
 }
+
 .result-header {
   color: #eeeeee;
   font-weight: bolder;
 }
+
+.result-container {
+  background-color: #270C3B;
+  padding: 2rem 2rem;
+  border-radius: 2rem;
+}
+.result-summary h3 {
+  display: inline-block;
+  color: white;
+}
+.result-summary span {
+  color: white;
+}
+.result-image-container{
+  margin-top: 1rem ;
+  display: flex;
+  justify-content: center;
+  width: 50%;
+}
+.img-wrap img{
+  width: 100%;
+}
+.result-important-features{
+  margin-top: 1.5rem;
+  text-align: justify;
+}
+.result-important-features p, h3{
+  color: white;
+  line-height: 1.5rem;
+}
+.result-important-features h3{
+  margin-bottom: 1rem;
+}
+
+
 
 .result-section-not-safe{
   display: flex;

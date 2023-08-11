@@ -100,8 +100,10 @@ def getPredictions(features_list):
     # load the model
     model = pickle.load(open("rf_model.sav", "rb"))
     prediction = model.predict(features_list)
+    prediction_prob = model.predict_proba(features_list)
     prediction = prediction[0]
-    return prediction
+    prediction_prob = prediction_prob[int(prediction)]
+    return prediction, prediction_prob
 
 
 class IndexView(View):
@@ -170,9 +172,11 @@ class ResultView(DetailView):
         # get model features using list comprehension
         model_features = [getattr(user_input, i) for i in feature_list]
         # make prediction with model
-        pred = getPredictions([model_features])
+        pred, pred_prob = getPredictions([model_features])
+
         self.object.pred = pred
         self.object.save()
+        pred_prob = f"{pred_prob[int(pred)]:2.2%}"
         # top features -- user input
         top_features = {
             "Aluminum": model_features[0],
@@ -218,6 +222,8 @@ class ResultView(DetailView):
 
         # assign pred to context as pred
         context["pred"] = pred
+        # assign prediciton probability to context
+        context["pred_prob"] = pred_prob
         # assign influential features to context
         context["features"] = top_features
         # assing top features names to context
