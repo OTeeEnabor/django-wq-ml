@@ -63,7 +63,21 @@
   border-radius: 1rem;
   justify-content: space-between;
 }
+.plotly-container{
+  background-color: #e48900;
+  padding: 1.5rem 1.5rem;
+}
+.plotly-container .plotly-app{
+  background-color: #270C3B;
+  padding: 1rem 1rem;
+}
 
+.plotly-container .plotly-app h3{
+  color: #eeeeee;
+}
+.plotly-app #dropdown{
+  margin-bottom: 1rem;
+}
 .result-text{
   width: 50%; /*add media query */
 }
@@ -73,6 +87,7 @@
 .result-image img {
   max-width: 100%;
 }
+
 #resultAnalysis{
     display: flex;
     flex-direction: column;
