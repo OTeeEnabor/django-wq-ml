@@ -1,10 +1,12 @@
 {% extends "base.html" %}
 {% load static %}
+{% load plotly_dash%}
 {% block title%}
 Prediction Result
 {% endblock%}
 {% block css_files %}
 <link rel="stylesheet" href='{% static "result.css" %}'>
+<script src ="https://cdn.plot.ly/plotly-latest.min.js"></script>
 {% endblock %}
 {% block content %}
 <section id="resultBlock">
@@ -49,33 +51,9 @@ Prediction Result
     </div>
 
 </section>
-{% comment %} 
-<div class="resultContainer">
-    <section id="resultBlock">
-        
-            {% if pred %}
-            <div class="result-section-safe">
-                <p>Based on the input given to the model, the water sample is safe for consumption. T</p>
-                <img src="{%static "wqpred/images/water_safe.png" %}" alt="Water sample is safe.">
-            </div>
-            {% else %}
-            <div class="result-section-not-safe">
-                <div class ="result-text">
-                    <p>Based on the inputs given to the machine learning model, this water sample is deemed not safe for consumption. The chemicals listed below are deemed to be the most influential in determing the outcome of water quality:</p>
-                    <ul>
-                        {%for key, value in features.items%}
-                            <li>{{key}}: {{value}}</li>
-                        {%endfor%} 
-                    </ul>
-                </div>
-                <div class="result-image">
-                    <img src="{%static "wqpred/images/water_not_safe.png"%}" alt="Water sample is not safe.">
-                </div>
-            </div>
-            {% endif %}
-       {% comment %} </div> {% endcomment %}
-    {% comment %} </section>
-</div> {% endcomment %} 
+<div class = "plotly-container">
+    {% plotly_app name="SimpleExample"  ratio=1%}
+</div>
 <div class="resultContainer">
     <section id = "resultAnalysis">
         <div class="result-header">
@@ -87,7 +65,7 @@ Prediction Result
                 A Random Forest classifier was used to predict the quality of the water sample. The classifier was trained with a publicly accessible dataset which had 8000 observations. The dataset was heavily imbalnaced with <strong>11%</strong> of the observations being safe to consume. The figure below shows the distribution of the target variable. 
             </p>
         </div>
-        <div class="analysis-image-holders">
+        {% comment %} <div class="analysis-image-holders">
             <div class="image">
             {% autoescape off %}
                     {{target_distribution}}
@@ -98,7 +76,7 @@ Prediction Result
                     {{median_distribution}}
             {% endautoescape %}
             </div> 
-        </div>
+        </div> {% endcomment %}
     </section>
 </div>
 {% endblock %}
