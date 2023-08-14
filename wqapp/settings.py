@@ -122,7 +122,14 @@ if DEVELOPMENT_MODE is True:
     }
 else:
     DATABASES = {
-        "default": dj_database_url.parse(os.environ.get("DATABASE_URL")),
+        "default": {
+            "ENGINE": "django.db.backends.postgresql_psycopg2",
+            "NAME": getenv("DB_NAME"),
+            "USER": getenv("DB_USER"),
+            "PASSWORD": getenv("DB_PASSWORD"),
+            "HOST": getenv("DB_HOST"),
+            "PORT": getenv("DB_PORT"),
+        }
     }
 
 
